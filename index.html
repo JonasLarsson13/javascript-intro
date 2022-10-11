@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript BMI kalkylator</title>
+    <style>
+        input {
+            border: 2px solid #ddd;
+            margin-bottom: 0.4rem;
+            padding: 0.5rem 0.8rem;
+            width: 200px;
+            border-radius: 4px;
+            outline: none;
+        }
+        button {
+            width: calc(200px + 1.6rem);
+            border: 2px solid rgb(203, 134, 7);
+            padding: 0.5rem 0;
+            border-radius: 4px;
+            background: orange;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        button:hover {
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Javascript intro - BMI kalkylator</h1>
+    <input type="number" id="height" placeholder="Längd i cm" /><br />
+    <input type="number" id="weight" placeholder="Vikt i kg" /><br />
+    <button id="btn">Kolla BMI</button>
+    <br /><br />
+    <b id="result"></b>
+    <script>
+        window.onload = () => {
+            let button = document.querySelector('#btn');
+
+            button.addEventListener("click", calcBMI);
+        }
+        function calcBMI() {
+            document.querySelector('#btn').style.opacity = "0.4";
+            setTimeout(() => {document.querySelector('#btn').style.opacity = "1";}, 3000);
+            let height = parseInt(document.querySelector('#height').value);
+            let weight = parseInt(document.querySelector('#weight').value);
+            let result = document.querySelector('#result');
+
+            if(height === "" || isNaN(height)) {
+                result.style.color = "red";
+                result.innerHTML = "Du glömde visst längd!";
+                document.querySelector('#height').style.border = "2px solid red";
+            } else if (weight === "" || isNaN(weight)) {
+                document.querySelector('#height').style.border = "2px solid green";
+                document.querySelector('#weight').style.border = "2px solid red";
+                result.style.color = "red";
+                result.innerHTML = "Du glömde ju din vikt!"
+            } else {
+                document.querySelector('#height').style.border = "2px solid green";
+                document.querySelector('#weight').style.border = "2px solid green";
+                let bmi = (weight / ((height * height) / 10000)).toFixed(2);
+                
+                if(bmi < 18.5) {
+                    result.style.color = "orange";
+                    result.innerHTML = "Undervikt, ät en bulle till!";
+                } else if(bmi >= 18.5 && bmi < 25) {
+                    result.style.color = "green";
+                    result.innerHTML = "Normalvikt!";
+                } else if(bmi >= 25 && bmi < 30) {
+                    result.style.color = "orange";
+                    result.innerHTML = "Övervikt, tänk dig för innan du äter..";
+                } else if(bmi >= 30) {
+                    result.style.color = "red";
+                    result.innerHTML = "Fetma! Inga gosaker för dig i fortsättningen!";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
