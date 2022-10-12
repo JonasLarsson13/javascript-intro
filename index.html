@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript BMI kalkylator & Dag/Månad</title>
     <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
         input {
             border: 2px solid #ddd;
             margin-bottom: 0.4rem;
@@ -14,6 +20,9 @@
             border-radius: 4px;
             outline: none;
             transition: all 0.2s ease-in-out;
+        }
+        input:active, input:focus-within {
+            border: 2px solid rgb(0, 162, 255);
         }
         button {
             width: calc(200px + 1.6rem);
@@ -34,7 +43,9 @@
         #currentMonth {
             font-size: 2rem;
             opacity: 0.3;
-            padding-left: 1rem;
+        }
+        .current-day {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -47,7 +58,7 @@
     <b id="result"></b>
     <br />
     <br />
-    <b>Idag är det: </b><i id="currentDay"></i><br />
+    <b class="current-day">Idag är det: </b><i id="currentDay"></i><br />
     <b id="currentMonth"></b>
     <script>
         // Kolla vilken dag/månad det är
