@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript BMI kalkylator</title>
+    <title>Javascript BMI kalkylator & Dag/Månad</title>
     <style>
         input {
             border: 2px solid #ddd;
@@ -13,6 +13,7 @@
             width: 200px;
             border-radius: 4px;
             outline: none;
+            transition: all 0.2s ease-in-out;
         }
         button {
             width: calc(200px + 1.6rem);
@@ -27,23 +28,60 @@
         button:hover {
             letter-spacing: 2px;
         }
+        i {
+            font-size: 1.4rem;
+        }
+        #currentMonth {
+            font-size: 2rem;
+            opacity: 0.3;
+            padding-left: 1rem;
+        }
     </style>
 </head>
 <body>
-    <h1>Javascript intro - BMI kalkylator</h1>
+    <h1>Javascript intro</h1>
     <input type="number" id="height" placeholder="Längd i cm" /><br />
     <input type="number" id="weight" placeholder="Vikt i kg" /><br />
     <button id="btn">Kolla BMI</button>
     <br /><br />
     <b id="result"></b>
+    <br />
+    <br />
+    <b>Idag är det: </b><i id="currentDay"></i><br />
+    <b id="currentMonth"></b>
     <script>
+        // Kolla vilken dag/månad det är
+        const date = new Date();
+        let day = date.getDay();
+        let month = date.getMonth();
+        let dayOutput = document.querySelector("#currentDay");
+        let monthOutput = document.querySelector("#currentMonth");
+        if(day == 1) {
+            dayOutput.innerHTML = "Måndag";
+        } else if(day == 2) {
+            dayOutput.innerHTML = "Tisdag";
+        } else if(day == 3) {
+            dayOutput.innerHTML = "Onsdag";
+        } else if(day == 4) {
+            dayOutput.innerHTML = "Torsdag";
+        } else if(day == 5) {
+            dayOutput.innerHTML = "Fredag";
+        } else if(day == 6) {
+            dayOutput.innerHTML = "Lördag";
+        } else if(day == 7) {
+            dayOutput.innerHTML = "Söndag";
+        }
+        const months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"];
+        monthOutput.innerHTML = months[month];
+
+        // BMI kalkylator
         window.onload = () => {
             let button = document.querySelector('#btn');
 
             button.addEventListener("click", calcBMI);
         }
         function calcBMI() {
-            document.querySelector('#btn').style.opacity = "0.4";
+            document.querySelector('#btn').style.opacity = "0.5";
             setTimeout(() => {document.querySelector('#btn').style.opacity = "1";}, 3000);
             let height = parseInt(document.querySelector('#height').value);
             let weight = parseInt(document.querySelector('#weight').value);
